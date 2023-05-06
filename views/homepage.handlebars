@@ -1,0 +1,13 @@
+<section class="py-4 py-xl-5 login-tm">
+  <div class="container" id="blog-row">
+    {{#each posts as |post|}}
+      <div id="home-blog-card" class="card">
+        <div class="card-body">
+          <a href="api/post/{{post.id}}"><h4
+              class="card-title"
+            >{{post.title}}</h4></a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>
