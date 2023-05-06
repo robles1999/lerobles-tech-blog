@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post, User} = require("../../models");
+const { Post, User } = require("../../models");
 
 router.get('/:id', async (req, res) => {
   console.log(req.params.id);
@@ -16,7 +16,6 @@ router.get('/:id', async (req, res) => {
 
   
       const post = postData.get({ plain: true });
-      console.log(post)
       res.render('post', {
         post
       });
