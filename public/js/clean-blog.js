@@ -1,7 +1,6 @@
 (function() {
   "use strict"; // Start of use strict
 
-  // Show the navbar when the page is scrolled up
   var MQL = 992;
   var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
   var mainNav = document.querySelector('#mainNav');
