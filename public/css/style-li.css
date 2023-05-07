@@ -33,3 +33,8 @@ header.masthead {
 #home-blog-card {
   margin-bottom: 15px;
 }
+
+.card-body {
+  padding-bottom: 0px;
+  padding-top: 20px;
+}
