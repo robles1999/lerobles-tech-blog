@@ -1,5 +1,5 @@
 (function() {
-  "use strict"; // Start of use strict
+  "use strict"; 
 
   var MQL = 992;
   var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -32,4 +32,4 @@
     });
   }
 
-})(); // End of use strict
+})();
