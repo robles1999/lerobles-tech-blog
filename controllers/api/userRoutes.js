@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post,  } = require("../../models");
+const { User, Post } = require("../../models");
 
 //! :::::::: NEW USER :::::::::::::
 router.post("/", async (req, res) => {
@@ -25,16 +25,12 @@ router.post("/", async (req, res) => {
 
 //! ::::::::: LOGIN :::::::::
 router.post("/login", async (req, res) => {
-  console.log("in login ++++++++++++++++++++++++++++");
   try {
     const userData = await User.findOne({
       where: {
         email: req.body.email,
       },
     });
-
-    const user = userData.get({ plain: true });
-    console.log("++++++++++++++++++++++++++++", user);
 
     if (!userData) {
       res
@@ -43,9 +39,9 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    console.log("User Data:", userData);
 
-    console.log("+++++++VALID PW++++++++++", validPassword);
+    const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res

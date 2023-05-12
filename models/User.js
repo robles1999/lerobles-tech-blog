@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
 class User extends Model {
-  async passwordMatches(password) {
-    return await bcrypt.compare(password, this.password);
+  checkPassword(password) {
+    return bcrypt.compareSync(password, this.password);
   }
 }
 
@@ -35,6 +35,14 @@ User.init(
         len: [8],
       },
     },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     hooks: {
@@ -48,7 +56,7 @@ User.init(
       },
     },
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "user",

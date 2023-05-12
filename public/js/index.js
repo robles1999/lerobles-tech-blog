@@ -29,6 +29,7 @@ const signupForm = async (event) => {
   }
 };
 
+// ! :::::::::::::::: LOG IN ::::::::::::::::::::::::
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -45,13 +46,48 @@ const loginFormHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
     console.log(response);
+
     if (response.ok) {
       document.location.replace("/dashboard");
+      console.log("Logged In!");
     } else {
-      alert(response.statusText);
+      console.log(
+        `+++++++++++++++Email:${email}\nPassword: ${password}++++++++++++++++`
+      );
+      alert("Please check your email and password and try again.");
+      // alert(response.statusText);
     }
   }
 };
+
+const userLogout = async (e) => {
+  console.log(
+    "In logout function.++++++++++++++++++++++++++++++++++++++++++++\n++++++++++++++++++++++++++++++++++++++++++"
+  );
+  const response = await fetch("/api/user/logout", {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    console.log("User has been logged out.");
+    document.location.replace("/");
+  }
+};
+
+const logout = async () => {
+  const response = await fetch("/api/user/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    document.location.replace("/");
+  } else {
+    alert(response.statusText);
+  }
+};
+
+document.querySelector("#logout").addEventListener("click", logout);
 
 const signUpFormBtn = document.querySelector("#sign-up-btn");
 if (signUpFormBtn) signUpFormBtn.addEventListener("click", signupForm);
