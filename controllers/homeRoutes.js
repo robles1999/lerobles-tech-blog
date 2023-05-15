@@ -2,9 +2,7 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
-/**
- * Route to display posts on homepage
- */
+//! ::::: DISPLAY ALL POSTS ON HOME PAGE :::::
 router.get("/", async (req, res) => {
   try {
     //get all posts and JOIN with user data
@@ -19,7 +17,10 @@ router.get("/", async (req, res) => {
 
     //serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
-
+    console.log(
+      "+++++++++++++++++++++++++++++++++++++++\nPost data for home page:",
+      posts
+    );
     //pass serialized data and session flag into template
     res.render("homepage", {
       posts,
@@ -30,9 +31,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-/**
- * Redirect to login from homepage
- */
+//! ::::: REDIRECT TO LOGIN PAGE :::::
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
@@ -42,6 +41,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+//! ::::: REDIRECT TO SIGN UP PAGE :::::
 router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
@@ -51,7 +51,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-//dashboard should get all of the post data based on the logged_in user id
+//! ::::: DISPLAY ALL POSTS BY THE LOGGED IN USER :::::
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -61,10 +61,11 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
     const userData = await User.findByPk(req.session.user_id);
 
-    const posts = postData.map((post) => post.get({ plain: true }));
-    const user = userData.get({ plain: true });
+    const posts = postData.map((post) => post.get({ plain: true })); // convert/parse object
+    const user = userData.get({ plain: true }); // get the user name from the user table
 
     res.render("dashboard", {
+      layout: "dashboard",
       posts,
       user,
       logged_in: req.session.logged_in,
@@ -76,7 +77,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
 });
 
 //render a post
-router.get("/post/:id", withAuth, async (req, res) => {
+router.get("/blog/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -99,11 +100,16 @@ router.get("/post/:id", withAuth, async (req, res) => {
       ],
     });
 
+    console.log(
+      "++++++++++++++++++++++++++++++++++++++++++++++++\ncommentData",
+      commentData
+    );
+
     const post = postData.get({ plain: true });
     const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     res.render("post", {
-      ...post,
+      post,
       comments,
       logged_in: req.session.logged_in,
     });
@@ -114,7 +120,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
 });
 
 //render createPost
-router.get("/createPost", withAuth, (req, res) => {
+router.get("/create-post", withAuth, (req, res) => {
   res.render("newPost");
 });
 

@@ -48,14 +48,13 @@ const loginFormHandler = async (event) => {
     console.log(response);
 
     if (response.ok) {
-      document.location.replace("/dashboard");
+      document.location.replace("/");
       console.log("Logged In!");
     } else {
       console.log(
         `+++++++++++++++Email:${email}\nPassword: ${password}++++++++++++++++`
       );
       alert("Please check your email and password and try again.");
-      // alert(response.statusText);
     }
   }
 };
@@ -87,10 +86,74 @@ const logout = async () => {
   }
 };
 
-document.querySelector("#logout").addEventListener("click", logout);
+// ::::: RENDER CREATE NEW POST PAGE :::::
+const createPost = (event) => {
+  event.preventDefault();
+  document.location.replace("/create-post");
+};
+
+// ::::: REDIRECT TO THE DASHBOARD TO ADD A NEW POST :::::
+const newHomePost = () => document.location.replace("/dashboard");
+
+// ::::: CREATE A NEW POST :::::
+const newPost = async (event) => {
+  event.preventDefault();
+  const title = document.querySelector("#new-post-title").value.trim();
+  const content = document.querySelector("#new-post-content").value.trim();
+
+  const response = await fetch("/api/blog", {
+    method: "POST",
+    body: JSON.stringify({ title, content }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    document.location.replace("/dashboard");
+  } else {
+    alert(response.statusText);
+  }
+};
+
+// ::::: CREATE A NEW COMMENT :::::
+const newComment = async (event) => {
+  event.preventDefault();
+  const comment_content = document
+    .querySelector("#new-comment-content")
+    .value.trim();
+
+  const response = await fetch("/api/comment", {
+    method: "POST",
+    body: JSON.stringify({
+      comment_content,
+      post_id: event.target.dataset.post_id,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    document.location.replace("/dashboard");
+  } else {
+    alert(response.statusText);
+  }
+};
+
+const logoutBtn = document.querySelector("#logout");
+if (logoutBtn) logoutBtn.addEventListener("click", logout);
+
+const createPostLink = document.querySelector("#create-post");
+if (createPostLink) createPostLink.addEventListener("click", createPost);
 
 const signUpFormBtn = document.querySelector("#sign-up-btn");
 if (signUpFormBtn) signUpFormBtn.addEventListener("click", signupForm);
 
 const loginFormBtn = document.querySelector("#login-btn");
 if (loginFormBtn) loginFormBtn.addEventListener("click", loginFormHandler);
+
+const newHomePostBtn = document.querySelector("#new-post-btn");
+if (newHomePostBtn) newHomePostBtn.addEventListener("click", newHomePost);
+
+const newPostSubBtn = document.querySelector("#new-post-sub-btn");
+if (newPostSubBtn) newPostSubBtn.addEventListener("click", newPost);
+
+const newCommentSubBtn = document.querySelector("#new-comment-sub-btn");
+if (newCommentSubBtn) newCommentSubBtn.addEventListener("click", newComment);

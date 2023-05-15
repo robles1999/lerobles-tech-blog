@@ -3,18 +3,25 @@
     {{#each posts as |post|}}
       <div id="home-blog-card" class="card">
         <div class="card-body">
-          <a href="/post/{{post.id}}"><h4
-              class="card-title"
-            >{{post.title}}</h4></a>
-          <p>Posted by
+          <a href="/blog/{{post.id}}">
+            <h3 class="card-title">{{post.title}}</h3></a>
+          <p class="m-0">Posted by
             {{user.name}}
             on
-            {{format_date post.post_dateCreated}}</p>
+            {{format_date post.createdAt}}</p>
         </div>
         <div class="post-description-style">
-          <p class="px-4">{{post.post_description}}</p>
+          <p class="px-4 mt-1">{{post.post_content}}</p>
         </div>
       </div>
     {{/each}}
   </div>
+  <div class="text-center mt-5">
+    <button
+      id="new-post-btn"
+      class="btn btn-primary"
+      type="button"
+    >+ post</button>
+  </div>
+
 </section>

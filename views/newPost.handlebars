@@ -1,19 +1,35 @@
-<section class="post-card">
-    <div class="post-header">
+<section class="text-center py-4 py-xl-5 login-tm">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-xl-6 text-center mx-auto" id="login-header">
         <h2>Create New Post</h2>
+      </div>
     </div>
-    <form class="newPost-form post-description-style">
-        <div class="form-flex">
-                <label for="post-title-input" class="login-fill">Title: </label>
-                <input class="form-input" type="textarea" id="post-title-input">
-
-                <label for="post-description-input" class="login-fill">Description: </label>
-                <textarea class="form-input" type="textarea" rows="20" id="post-description-input"></textarea>
-            <div class="login-fill">
-                <button class="btn-style" type="submit">Create</button>
-            </div>
-        </div>
+  </div>
+  <div class="container">
+    <form class="text-start" method="post">
+      <label class="form-label mt-3" for="new-post-title">Post title
+      </label>
+      <input
+        id="new-post-title"
+        class="form-control"
+        type="text"
+        placeholder="Post title"
+        name="new-post-title"
+      />
+      <label class="form-label mt-3" for="new-post-content">Post content</label>
+      <input
+        id="new-post-content"
+        class="form-control"
+        type="text"
+        placeholder="Post content"
+        name="new-post-content"
+      />
     </form>
+  </div>
+  <button
+    id="new-post-sub-btn"
+    class="btn btn-primary mt-5"
+    type="button"
+  >create</button>
 </section>
-
-<script src="./js/post.js"></script>

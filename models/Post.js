@@ -5,27 +5,14 @@ class Post extends Model {}
 
 Post.init(
   {
-    //standard primary key id
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     //post title
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     //post description (mini project let "project" description to have NULL case, implies can make posts with empty descriptions)
-    post_description: {
+    post_content: {
       type: DataTypes.STRING,
-    },
-    //date created
-    post_dateCreated: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     //user id foreign key
     user_id: {
@@ -38,7 +25,7 @@ Post.init(
   },
   {
     sequelize,
-    timsestamps: false,
+    timsestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "post",

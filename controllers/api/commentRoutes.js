@@ -2,12 +2,12 @@ const router = require('express').Router();
 const { Comment } = require("../../models");
 const withAuth = require('../../utils/auth');
 
-//create new comment
+//! ::::: NEW COMMENT :::::
 router.post("/", withAuth, async(req,res) => {
     try {
-        console.log("here in comment/api");
+        console.log("+++++++++++++++++++++++\nhere in comment/api");
         const newComment = await Comment.create({
-            comment_description: req.body.description,
+            comment_content: req.body.comment_content,
             user_id: req.session.user_id,
             post_id: req.body.post_id,
         });

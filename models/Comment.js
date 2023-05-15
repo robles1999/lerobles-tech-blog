@@ -13,7 +13,7 @@ Comment.init(
             autoIncrement: true,
         },
         //having comment description not allow null, since it does not have title field
-        comment_description: {
+        comment_content: {
             type: DataTypes.STRING,
             allowNull: false,
         },
