@@ -21,31 +21,36 @@
     {{/each}}
   </div>
 </section>
-<section class="text-center login-tm mt-0">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-xl-6 text-center mx-auto m-0" id="login-header">
-        <h2 class="m-0">Add Comment</h2>
+{{#if logged_in}}
+  <section class="text-center login-tm mt-0">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-md-8 col-xl-6 text-center mx-auto m-0"
+          id="login-header"
+        >
+          <h2 class="m-0">Add Comment</h2>
+        </div>
       </div>
     </div>
-  </div>
-  {{! ! FIX THE FORM BELOW TO ADD COMMENTS }}
-  <div class="container">
-    <form class="text-start" method="post">
-      <label class="form-label" for="new-comment-content">Comment</label>
-      <input
-        id="new-comment-content"
-        class="form-control"
-        type="text"
-        placeholder="New comment content"
-        name="new-comment-content"
-      />
-    </form>
-  </div>
-  <button
-    id="new-comment-sub-btn"
-    class="btn btn-primary mt-5"
-    type="button"
-    data-post_id="{{post.id}}"
-  >Add comment</button>
-</section>
+    {{! ! FIX THE FORM BELOW TO ADD COMMENTS }}
+    <div class="container">
+      <form class="text-start" method="post">
+        <label class="form-label" for="new-comment-content">Comment</label>
+        <input
+          id="new-comment-content"
+          class="form-control"
+          type="text"
+          placeholder="New comment content"
+          name="new-comment-content"
+        />
+      </form>
+    </div>
+    <button
+      id="new-comment-sub-btn"
+      class="btn btn-primary mt-5"
+      type="button"
+      data-post_id="{{post.id}}"
+    >Add comment</button>
+  </section>
+{{/if}}

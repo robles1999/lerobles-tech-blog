@@ -77,7 +77,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
 });
 
 //render a post
-router.get("/blog/:id", withAuth, async (req, res) => {
+router.get("/blog/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -109,6 +109,7 @@ router.get("/blog/:id", withAuth, async (req, res) => {
     const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     res.render("post", {
+      layout: "posts",
       post,
       comments,
       logged_in: req.session.logged_in,

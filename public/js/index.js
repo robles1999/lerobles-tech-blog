@@ -117,6 +117,7 @@ const newPost = async (event) => {
 // ::::: CREATE A NEW COMMENT :::::
 const newComment = async (event) => {
   event.preventDefault();
+  const postId = event.target.dataset.post_id;
   const comment_content = document
     .querySelector("#new-comment-content")
     .value.trim();
@@ -125,13 +126,13 @@ const newComment = async (event) => {
     method: "POST",
     body: JSON.stringify({
       comment_content,
-      post_id: event.target.dataset.post_id,
+      post_id: postId,
     }),
     headers: { "Content-Type": "application/json" },
   });
 
   if (response.ok) {
-    document.location.replace("/dashboard");
+    document.location.replace(`/blog/${postId}`);
   } else {
     alert(response.statusText);
   }

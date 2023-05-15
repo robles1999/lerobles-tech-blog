@@ -13,8 +13,6 @@ router.post("/", withAuth, async(req,res) => {
         });
         res.status(200).json(newComment);
     } catch (err) {
-        ("err in comment/api");
-        console.log(req.body);
         console.log(err);
         res.status(400).json(err);
     }
