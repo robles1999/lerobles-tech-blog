@@ -138,6 +138,24 @@ const newComment = async (event) => {
   }
 };
 
+// ::::: DELETE A POST :::::
+const deletePost = async (event) => {
+  event.preventDefault();
+
+  console.log("++++++++++++++++++++++++ ID:", id);
+  const id = event.target.dataset.post_id;
+  const response = await fetch(`/api/blog/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    console.log("Post successfully deleted.");
+    document.location.replace("/dashboard");
+  } else {
+    alert(response.statusText);
+  }
+};
+
 const logoutBtn = document.querySelector("#logout");
 if (logoutBtn) logoutBtn.addEventListener("click", logout);
 
@@ -158,3 +176,6 @@ if (newPostSubBtn) newPostSubBtn.addEventListener("click", newPost);
 
 const newCommentSubBtn = document.querySelector("#new-comment-sub-btn");
 if (newCommentSubBtn) newCommentSubBtn.addEventListener("click", newComment);
+
+const trashCanBtn = document.querySelector("#trash-can");
+if (trashCanBtn) trashCanBtn.addEventListener("click", deletePost);

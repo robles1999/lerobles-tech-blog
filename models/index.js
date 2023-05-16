@@ -5,7 +5,7 @@ const Comment = require("./Comment");
 //User hasMany Post
 User.hasMany(Post, {
   foreignKey: "user_id",
-  onDelete: "CASCADE", //if User is deleted, post will be deleted as well (as opposed to saying "User No Longer Exists" or smth)
+  onDelete: "CASCADE", //if User is deleted, delete all posts.
 });
 
 //Post belongsTo User
@@ -15,8 +15,8 @@ Post.belongsTo(User, {
 
 //User hasMany Comment
 User.hasMany(Comment, {
-  foreignKey: "user_id", // comments will have a user_id
-  onDelete: "", //Probably Cascade?
+  foreignKey: "user_id", // comments will have a user_id column
+  onDelete: "", // cascade?
 });
 
 //Comment belongsTo User
@@ -27,7 +27,7 @@ Comment.belongsTo(User, {
 //Post hasMany Comment
 Post.hasMany(Comment, {
   foreignKey: "post_id", // comment will have a post_id column
-  onDelete: "", //Probably Cascade?
+  onDelete: "CASCADE", // when a post is deleted, delete all associated comments
 });
 
 //Comment belongsTo Post

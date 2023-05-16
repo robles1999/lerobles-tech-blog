@@ -58,16 +58,24 @@ router.get("/dashboard", withAuth, async (req, res) => {
       where: {
         user_id: req.session.user_id, //I think this gets the user_id that's saved in the db?
       },
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
     });
+
     const userData = await User.findByPk(req.session.user_id);
 
     const posts = postData.map((post) => post.get({ plain: true })); // convert/parse object
     const user = userData.get({ plain: true }); // get the user name from the user table
 
+    console.log("+++++++++++++++++++++++++++++++++++++++++++++\nuser:", user);
     res.render("dashboard", {
       layout: "dashboard",
       posts,
-      user,
+      // user,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

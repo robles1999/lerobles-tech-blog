@@ -19,8 +19,15 @@
         </div>
       </div>
     {{/each}}
+    <div>
+      {{#unless logged_in}}
+        <p>* Log in to leave a comment.</p>
+      {{/unless}}
+    </div>
   </div>
 </section>
+
+{{! !:::::::::::::: COMMENT SECTION :::::::::::::::::::: }}
 {{#if logged_in}}
   <section class="text-center login-tm mt-0">
     <div class="container">
@@ -33,7 +40,6 @@
         </div>
       </div>
     </div>
-    {{! ! FIX THE FORM BELOW TO ADD COMMENTS }}
     <div class="container">
       <form class="text-start" method="post">
         <label class="form-label" for="new-comment-content">Comment</label>

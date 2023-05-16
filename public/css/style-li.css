@@ -36,5 +36,9 @@ header.masthead {
 
 .card-body {
   padding-bottom: 0px;
-  padding-top: 20px;
+  padding-top: 10px;
+}
+
+.edit-delete-icon {
+  padding-right: 25px;
 }
