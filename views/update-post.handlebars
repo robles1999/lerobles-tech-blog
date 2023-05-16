@@ -1,0 +1,38 @@
+<section class="text-center py-4 py-xl-5 login-tm">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-xl-6 text-center mx-auto" id="login-header">
+        <h2>Update Post</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <form class="text-start" method="post">
+      <label class="form-label mt-3" for="new-post-title">Post title
+      </label>
+      <input
+        id="update-post-title"
+        class="form-control"
+        type="text"
+        placeholder="Post title"
+        name="new-post-title"
+        value="{{updatedPost.title}}"
+      />
+      <label class="form-label mt-3" for="new-post-content">Post content</label>
+      <input
+        id="update-post-content"
+        class="form-control"
+        type="text"
+        placeholder="Post content"
+        name="new-post-content"
+        value="{{updatedPost.post_content}}"
+      />
+    </form>
+  </div>
+  <button
+    id="update-post-btn"
+    class="btn btn-primary mt-5"
+    data-id="{{updatedPost.id}}"
+    type="button"
+  >update</button>
+</section>

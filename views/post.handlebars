@@ -2,9 +2,12 @@
   <div class="container" id="blog-row">
     <div id="home-blog-card" class="card">
       <div class="card-body">
-        <h4 class="card-title">{{post.title}}({{format_date
-            post.createdAt
-          }})</h4>
+        <div class="card-title row justify-content-between">
+          <h4 class="d-inline-block">{{post.title}}</h4>
+          <p class="d-inline-block posted-by text-secondary">Posted on
+            {{format_date post.createdAt}}</p>
+        </div>
+
         <p class="card-text mt-2 mb-3">{{post.post_content}}</p>
       </div>
     </div>

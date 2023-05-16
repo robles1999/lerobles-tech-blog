@@ -41,12 +41,31 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
+//! ::::::::: DISPLAY AND POPULATE THE UPDATE BLOG FORM :::::::::
+router.get("/:id", withAuth, async (req, res) => {
+  try {
+    const updatePost = await Post.findByPk(req.params.id);
+
+    const updatedPost = updatePost.get({ plain: true });
+    console.log("Updating post:", updatedPost);
+
+    res.render("update-post", {
+      layout: "posts",
+      updatedPost,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
 //! ::::::::: EDIT A BLOG POST :::::::::
 router.put("/:id", withAuth, async (req, res) => {
   try {
     const updatedPost = {
-      title: req.body.newTitle,
-      post_description: req.body.newDescription,
+      title: req.body.update_title,
+      post_content: req.body.update_content,
     };
     const postData = await Post.update(updatedPost, {
       where: {

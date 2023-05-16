@@ -40,10 +40,14 @@ header.masthead {
 }
 
 .edit-delete-icon {
-  padding-right: 25px;
+  padding-right: 29px;
 }
 
 .far,
 .fas:hover {
   cursor: pointer;
+}
+
+.posted-by {
+  font-size: 1rem;
 }

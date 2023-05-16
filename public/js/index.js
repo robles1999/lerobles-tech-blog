@@ -20,7 +20,7 @@ const signupForm = async (event) => {
     if (response.ok) {
       const { message } = await response.json();
       console.log(message);
-      document.location.replace("/dashboard");
+      document.location.replace("/");
     } else {
       alert(
         "Please check your user name and password.\nIf you are a new user, please Sign Up."
@@ -143,7 +143,6 @@ const handleDelEdit = async (event) => {
   event.preventDefault();
 
   if (event.target.classList.contains("trash-can")) {
-
     const id = event.target.dataset.post_id;
 
     const response = await fetch(`/api/blog/${id}`, {
@@ -156,6 +155,46 @@ const handleDelEdit = async (event) => {
     } else {
       alert(response.statusText);
     }
+  }
+};
+
+// ::::: RENDER THE FORM TO UPDATE THE POST :::::
+const renderPost = async (event) => {
+  event.preventDefault();
+
+  if (event.target.classList.contains("pencil")) {
+    const id = event.target.dataset.post_id;
+    document.location.replace(`/api/blog/${id}`);
+  }
+};
+
+// ::::: UPDATE A POST :::::
+const updatePost = async (event) => {
+  event.preventDefault();
+
+  const update_title = document
+    .querySelector("#update-post-title")
+    .value.trim();
+
+  const update_content = document
+    .querySelector("#update-post-content")
+    .value.trim();
+
+  const id = event.target.dataset.id;
+  const response = await fetch(`/api/blog/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      update_title,
+      update_content,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    console.log("Post successfully deleted.");
+    document.location.replace("/dashboard");
+  } else {
+    alert(response.statusText);
   }
 };
 
@@ -188,3 +227,12 @@ const trashButtons = document.querySelectorAll("i.trash-can");
 trashButtons.forEach((button) => {
   button.addEventListener("click", handleDelEdit);
 });
+
+// Add event listener to the pencil button
+const pencilButtons = document.querySelectorAll("i.pencil");
+pencilButtons.forEach((button) => {
+  button.addEventListener("click", renderPost);
+});
+
+const updatePostBtn = document.querySelector("#update-post-btn");
+if (updatePostBtn) updatePostBtn.addEventListener("click", updatePost);
