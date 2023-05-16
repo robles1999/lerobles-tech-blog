@@ -139,20 +139,23 @@ const newComment = async (event) => {
 };
 
 // ::::: DELETE A POST :::::
-const deletePost = async (event) => {
+const handleDelEdit = async (event) => {
   event.preventDefault();
 
-  console.log("++++++++++++++++++++++++ ID:", id);
-  const id = event.target.dataset.post_id;
-  const response = await fetch(`/api/blog/${id}`, {
-    method: "DELETE",
-  });
+  if (event.target.classList.contains("trash-can")) {
 
-  if (response.ok) {
-    console.log("Post successfully deleted.");
-    document.location.replace("/dashboard");
-  } else {
-    alert(response.statusText);
+    const id = event.target.dataset.post_id;
+
+    const response = await fetch(`/api/blog/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      console.log("Post successfully deleted.");
+      document.location.replace("/dashboard");
+    } else {
+      alert(response.statusText);
+    }
   }
 };
 
@@ -177,5 +180,11 @@ if (newPostSubBtn) newPostSubBtn.addEventListener("click", newPost);
 const newCommentSubBtn = document.querySelector("#new-comment-sub-btn");
 if (newCommentSubBtn) newCommentSubBtn.addEventListener("click", newComment);
 
-const trashCanBtn = document.querySelector("#trash-can");
-if (trashCanBtn) trashCanBtn.addEventListener("click", deletePost);
+// const blogRow = document.querySelector("#blog-row");
+// if (blogRow) blogRow.addEventListener("click", handleDelEdit);
+
+// Add event listener to the trash-can button
+const trashButtons = document.querySelectorAll("i.trash-can");
+trashButtons.forEach((button) => {
+  button.addEventListener("click", handleDelEdit);
+});

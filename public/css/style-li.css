@@ -42,3 +42,8 @@ header.masthead {
 .edit-delete-icon {
   padding-right: 25px;
 }
+
+.far,
+.fas:hover {
+  cursor: pointer;
+}
