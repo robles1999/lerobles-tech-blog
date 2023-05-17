@@ -41,15 +41,19 @@
                 class="nav-link"
                 href="/dashboard"
               >dashboard</a></li>
-            <li class="nav-item"><a
-                class="nav-link"
-                href="/login"
-              >login</a></li>
-            <li class="nav-item"><a
-                id="logout"
-                class="nav-link"
-                href=""
-              >logout</a></li>
+            {{#unless logged_in}}
+              <li class="nav-item"><a
+                  class="nav-link"
+                  href="/login"
+                >login</a></li>
+            {{/unless}}
+            {{#if logged_in}}
+              <li class="nav-item"><a
+                  id="logout"
+                  class="nav-link"
+                  href=""
+                >logout</a></li>
+            {{/if}}
           </ul>
         </div>
       </div>
