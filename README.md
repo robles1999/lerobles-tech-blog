@@ -1,4 +1,8 @@
 # Tech-Blog Site
+[The Tech-Blog Website](https://lerobles-tech-blog.herokuapp.com/)
+
+![login screenshot](./public/images/login-screenshot.jpg)
+![home screenshot](./public/images/home-screenshot.jpg)
 
 ## Description
 This is a CMS-style blog site where users can create, edit, and delete blog posts, as well as leave comments on existing blog posts. Users can also sign up and log in to access their own dashboard where they can view and edit their own posts.
