@@ -19,3 +19,9 @@ If you click on the homepage option in the navigation, you will be taken to the 
 If you click on the dashboard option in the navigation, you will be taken to the dashboard and presented with any blog posts you have already created and the option to add a new blog post. If you click on the button to add a new blog post, you will be prompted to enter both a title and contents for your blog post. When you click on the button to create a new blog post, the title and contents of your post will be saved and you will be taken back to an updated dashboard with your new blog post. If you click on one of your existing posts in the dashboard, you will be able to delete or update your post and taken back to an updated dashboard.
 
 If you click on the logout option in the navigation, you will be signed out of the site. If you are idle on the site for more than a set time, you will be able to view posts and comments but you will be prompted to log in again before you can add, update, or delete posts.
+
+## Technologies
+- HTML
+- Handlebars
+- CSS
+- JavaScript
